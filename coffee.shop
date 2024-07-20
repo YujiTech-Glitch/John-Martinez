@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Martinez Coffee Shop!</h1>
+        <div id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li>Coffee - $3.50</li>
+                <li>Latte - $4.00</li>
+                <li>Cappuccino - $4.00</li>
+                <li>Muffin - $2.50</li>
+                <li>Croissant - $3.00</li>
+                <li>Cookie - $1.50</li>
+            </ul>
+        </div>
+        <div id="order">
+            <h2>Place Your Order</h2>
+            <label for="orderInput">Enter your order (comma separated): </label>
+            <input type="text" id="orderInput">
+            <button onclick="calculateTotal()">Calculate Total</button>
+            <p id="totalCost"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <img src="https://web.facebook.com/photo/?fbid=1862035354103075&set=p.1862035354103075.jpg">
+</body>
+</html>
+
+CSS
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+#order {
+    margin-top: 20px;
+}
+
+#orderInput {
+    padding: 5px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p#totalCost {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+JavaScript
+// Function to calculate the total cost based on the order
+function calculateTotal() {
+    const orderInput = document.getElementById('orderInput').value.toLowerCase();
+    const orderItems = orderInput.split(',').map(item => item.trim());
+
+    // Define the prices for each item
+    const menu = {
+        coffee: 3.50,
+        latte: 4.00,
+        cappuccino: 4.00,
+        muffin: 2.50,
+        croissant: 3.00,
+        cookie: 1.50
+    };
+
+    let totalCost = 0;
+
+    // Calculate total based on user's order
+    orderItems.forEach(item => {
+        if (menu[item]) {
+            totalCost += menu[item];
+        } else {
+            console.log(`Sorry, we don't have ${item} on our menu.`);
+        }
+    });
+
+    // Display the total cost on the webpage
+    const totalCostDisplay = document.getElementById('totalCost');
+    totalCostDisplay.textContent = `Total: $${totalCost.toFixed(2)}`;
+}
